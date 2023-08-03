@@ -23,15 +23,20 @@ export class PlaceListComponent implements OnInit {
     }];
   }
 
+  //Utilizamos el ngOnInit para Ejecutar código antes de que se muestre al usuario
   ngOnInit(): void {
-    // this.placesService.getPlaces().subscribe(places => {
-    //   this.places = places;
-    // })
+    //Nos suscribimos al observable de getPlaces
+    this.placesService.getPlaces().subscribe(places => {
+      this.places = places;
+    })
   }
 
-  async onClickDelete(place: Place) {
-    // const response = await this.placesService.deletePlace(place);
-    // console.log(response);
+  //Método para Borra los Places
+  onClickDelete(place: Place) {
+    //Manejo de la promesa
+    this.placesService.deletePlace(place)
+      .then(response => {console.log(response);})
+      .catch(error => {console.log(error)});
   }
 
 }
