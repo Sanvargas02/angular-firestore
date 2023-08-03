@@ -24,4 +24,7 @@ export class PlacesService {
 
   }
 
+  //Método para Obtener los datos de la BD
+  getPlaces() {}
+
 }

@@ -27,11 +27,15 @@ export class NewPlaceComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  async onSubmit() {
+  //Método para añadir los lugares a la BD
+  onSubmit() {
     console.log(this.formulario.value) //this.formulario.value -> objeto con todos los datos
     //Manejamos la promesa con un async await
-    const response = await this.placesService.addPlace(this.formulario.value);
-    console.log(response);
+    // const response = await this.placesService.addPlace(this.formulario.value);
+    // console.log(response);
+    this.placesService.addPlace(this.formulario.value)
+     .then(response => {console.log(response)})
+     .catch(error => {console.log(error)});
     // Después de enviar los datos, puedes limpiar el formulario
     this.formulario.reset();
   }
