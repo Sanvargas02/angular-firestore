@@ -4,6 +4,9 @@ import { BrowserModule } from '@angular/platform-browser';
 //Modulo de Ruteo
 import { AppRoutingModule } from './app-routing.module';
 
+//Formulario
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 //Firebase
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
@@ -23,7 +26,7 @@ import { PlaceListComponent } from './components/place-list/place-list.component
   declarations: [
     AppComponent,
     NewPlaceComponent,
-    PlaceListComponent,
+    PlaceListComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +34,9 @@ import { PlaceListComponent } from './components/place-list/place-list.component
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
-    provideFirestore(() => getFirestore())
+    provideFirestore(() => getFirestore()),
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

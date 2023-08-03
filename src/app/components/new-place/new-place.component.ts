@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import {  FormGroup, FormControl } from '@angular/forms';
 import { PlacesService } from 'src/app/services/places.service';
 
 @Component({
@@ -12,7 +12,7 @@ export class NewPlaceComponent implements OnInit {
   formulario: FormGroup;
 
   constructor(
-    private placesService: PlacesService
+    private placesService: PlacesService //Inyectamos el Servicio
   ) {
     this.formulario = new FormGroup({
       name: new FormControl(),
@@ -27,9 +27,10 @@ export class NewPlaceComponent implements OnInit {
   }
 
   async onSubmit() {
-    console.log(this.formulario.value)
-    // const response = await this.placesService.addPlace(this.formulario.value);
-    // console.log(response);
+    console.log(this.formulario.value) //this.formulario.value -> objeto con todos los datos
+    //Manejamos la promesa con un async await
+    const response = await this.placesService.addPlace(this.formulario.value);
+    console.log(response);
   }
 
 }
