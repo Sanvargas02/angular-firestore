@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {  FormGroup, FormControl } from '@angular/forms';
+import {  FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { PlacesService } from 'src/app/services/places.service';
 
 @Component({
@@ -12,14 +12,15 @@ export class NewPlaceComponent implements OnInit {
   formulario: FormGroup;
 
   constructor(
-    private placesService: PlacesService //Inyectamos el Servicio
+    private placesService: PlacesService, //Inyectamos el Servicio
+    fb: FormBuilder // Inyectamos el FormBuilder para formulario Reactivos
   ) {
-    this.formulario = new FormGroup({
-      name: new FormControl(),
-      latitude: new FormControl(),
-      longitude: new FormControl(),
-      description: new FormControl(),
-      image: new FormControl()
+    this.formulario = fb.group({
+      name: ["", Validators.required],
+      latitude: ["", Validators.required],
+      longitude: ["", Validators.required],
+      description: ["", Validators.required],
+      image: ["", Validators.required]
     })
   }
 
@@ -31,6 +32,8 @@ export class NewPlaceComponent implements OnInit {
     //Manejamos la promesa con un async await
     const response = await this.placesService.addPlace(this.formulario.value);
     console.log(response);
+    // Después de enviar los datos, puedes limpiar el formulario
+    this.formulario.reset();
   }
 
 }
